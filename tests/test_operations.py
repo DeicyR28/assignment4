@@ -362,3 +362,56 @@ def test_operations_invalid_input_types(calc_method, a, b, expected_exception):
         calc_method(a, b)
 
 
+def test_power_positive():
+    """
+    Test the power method with two positive numbers.
+    
+    This test verifies that multiplying two positive numbers returns the correct product.
+    """
+    # Arrange
+    a = 2.0
+    b = 2.0
+    expected_result = 4.0
+
+    # Act
+    result = Operation.power(a, b)
+
+    # Assert
+    assert result == expected_result, f"Expected {a} * {b} to be {expected_result}, got {result}"
+
+
+def test_modular_positive():
+    """
+    Test the modular method with two positive numbers.
+    
+    This test verifies that the modulus operation returns the correct remainder.
+    """
+    # Arrange
+    a = 10.0
+    b = 3.0
+    expected_result = 1.0  # 10 % 3 = 1
+
+    # Act
+    result = Operation.modular(a, b)
+
+    # Assert
+    assert result == expected_result, f"Expected {a} % {b} to be {expected_result}, got {result}"
+
+def test_percentage_positive():
+    """
+    Test the percentage method with two positive numbers.
+    
+    This test verifies that calculating a percentage returns the correct result.
+    """
+    # Arrange
+    a = 200.0
+    b = 10.0
+    expected_result = 20.0  # 10% of 200 = 20
+
+    # Act
+    result = Operation.percentage(a, b)
+
+    # Assert
+    assert result == expected_result, (
+        f"Expected {b}% of {a} to be {expected_result}, got {result}"
+    )

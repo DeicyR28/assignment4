@@ -131,5 +131,69 @@ class Operation:
             # Checks if the divisor is zero to prevent undefined division.
             raise ValueError("Division by zero is not allowed.")  # Raises an error if division by zero is attempted.
         return a / b  # Divides `a` by `b` and returns the quotient.
-
     
+    @staticmethod
+    def power(a: float, b: float) -> float:
+        """
+        Raises a floating-point number to the power of another and returns the result.
+        **Parameters:**
+        - `a (float)`: The base number.
+        - `b (float)`: The exponent to raise the base to.
+        
+        **Returns:**
+        - `float`: The result of `a` raised to the power of `b`.
+        **Example:**
+        >>> Operation.power(2.0, 3.0)
+        8.0
+        **Advantages of Static Methods in Utility Classes:**
+        - Static methods in utility classes like this one provide simple access to functions 
+          without requiring an instance of the class. This reduces overhead and makes 
+          the methods easily reusable in other parts of the program.
+      """
+        return a ** b  # Raises a to the power of b and returns the result.   
+    
+    @staticmethod
+    def modular(a: float, b: float) -> float:
+        """
+        Returns the remainder of dividing a by b (modulus operation).
+
+        **Parameters:**
+        - `a (float)`: The dividend (number to be divided).
+        - `b (float)`: The divisor (number to divide by).
+
+        **Returns:**
+        - `float`: The remainder of a divided by b.
+
+        **Example:**
+        >>> Operation.modular(10.0, 3.0)
+        1.0
+
+        **Advantages of Static Methods in Utility Classes:**
+        - Static methods provide direct access without creating an instance.
+        - They are reusable and reduce overhead in other parts of the program.
+        """
+        return a % b  # Returns remainder of a divided by b
+
+    @staticmethod
+    def percentage(a: float, b: float) -> float:
+        """
+        Calculates the percentage of a number.
+
+        **Parameters:**
+        - `a (float)`: The base number.
+        - `b (float)`: The percentage to calculate of `a`.
+
+        **Returns:**
+        - `float`: The result of `b` percent of `a`.
+
+        **Example:**
+        >>> Operation.percentage(200.0, 10.0)
+        20.0
+
+        **Advantages of Static Methods in Utility Classes:**
+        - Static methods provide direct access without creating an instance.
+        - They are reusable and reduce overhead in other parts of the program.
+        """
+        return (a * b) / 100  # Calculates b% of a
+
+          
