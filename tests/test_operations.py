@@ -346,6 +346,10 @@ def test_division_with_zero_numerator():
     (Operation.subtraction, 10.0, '5', TypeError),
     (Operation.multiplication, '10', '5', TypeError),
     (Operation.division, 10.0, '5', TypeError),
+    (Operation.power, 2.0, '3', TypeError),
+    (Operation.modular, 10.0, '3', TypeError),
+    (Operation.percentage, 20.0, '1', TypeError),
+                     
 ])
 def test_operations_invalid_input_types(calc_method, a, b, expected_exception):
     """
