@@ -575,6 +575,8 @@ def test_calculation_execute_parameterized(
     ('multiply', 10.0, 5.0, "MultiplyCalculation: 10.0 Multiply 5.0 = 50.0"),
     ('divide', 10.0, 5.0, "DivideCalculation: 10.0 Divide 5.0 = 2.0"),
     ('power', 2.0, 3.0, "PowerCalculation: 2.0 Power 3.0 = 8.0"),
+    ('modular',10.0, 3.0, "ModularCalculation: 10.0 Modular 3.0 = 1.0"),
+    ('percentage', 200.0, 10.0, "PercentageCalculation: 200.0 Percentage 10.0 = 20.0"),
 
 ])
 @patch.object(Operation, 'addition', return_value=15.0)
@@ -582,9 +584,11 @@ def test_calculation_execute_parameterized(
 @patch.object(Operation, 'multiplication', return_value=50.0)
 @patch.object(Operation, 'division', return_value=2.0)
 @patch.object(Operation, 'power', return_value=8.0)
+@patch.object(Operation, 'modular', return_value=1.0)
+@patch.object(Operation, 'percentage',return_value=20.0)
 
 def test_calculation_str_parameterized(
-    mock_power,mock_division, mock_multiplication, mock_subtraction, mock_addition,
+    mock_percentage,mock_modular,mock_power,mock_division, mock_multiplication, mock_subtraction, mock_addition,
     calc_type, a, b, expected_str
 ):
     """
