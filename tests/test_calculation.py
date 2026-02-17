@@ -23,6 +23,7 @@ from app.calculation import (
     DivideCalculation,
     PowerCalculation,
     ModularCalculation,
+    PercentageCalculation,
     Calculation
 )
 
@@ -320,6 +321,49 @@ def test_modular_calculation_execute_negative(mock_modular):
     assert str(exc_info.value) == "Modular error"
 
 
+@patch.object(Operation, 'percentage')
+def test_percentage_calculation_execute_positive(mock_percentage):
+    """
+    Test the execute method of PercentageCalculation for a positive scenario.
+
+    This test verifies that the PercentageCalculation class correctly calls the percentage
+    method of the Operation class with the provided operands and returns the expected result.
+    """
+    # Arrange
+    a = 200.0  # First operand
+    b = 10.0   # Second operand
+    expected_result = 20.0  # Expected result of percentage
+    mock_percentage.return_value = expected_result  # Mock the percentage method's return value
+    percentage_calc = PercentageCalculation(a, b)  # Instantiate percentageCalculation with operands
+
+    # Act
+    result = percentage_calc.execute()  # Execute the percentage calculation
+
+    # Assert
+    mock_percentage.assert_called_once_with(a, b)  # Ensure percentage was called with correct operands
+    assert result == expected_result  # Verify the result matches the expected value
+
+
+@patch.object(Operation, 'percentage')
+def test_percentage_calculation_execute_negative(mock_percentage):
+    """
+    Test the execute method of PercentageCalculation for a negative scenario.
+
+    This test ensures that if the Operation.percentage method raises an exception,
+    the PercentageCalculation.execute method propagates it correctly.
+    """
+    # Arrange
+    a = 200.0
+    b = 10.0
+    mock_percentage.side_effect = Exception("percentage error")  # Simulate an exception in percentage
+    percentage_calc = PercentageCalculation(a, b)
+
+    # Act & Assert
+    with pytest.raises(Exception) as exc_info:
+        percentage_calc.execute()  # Attempt to execute percentage, expecting an exception
+
+    # Verify that the exception message is as expected
+    assert str(exc_info.value) == "percentage error"
 
 # -----------------------------------------------------------------------------------
 # Test CalculationFactory
