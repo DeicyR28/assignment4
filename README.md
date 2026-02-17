@@ -262,3 +262,43 @@ Then submit the GitHub repository link as instructed.
 - [Python Downloads](https://www.python.org/downloads/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [GitHub SSH Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+
+# 📦 Calculator Project 
+
+## Features
+
+This calculator currently supports the following operations:
+
+- ***Addition** (`+`): Adds two numbers
+- **Subtraction** (`-`): Subtracts one number from another
+- **Multiplication** (`*`): Multiplies two numbers
+- **Division** (`/`): Divides one number by another
+- **Modular** (`%`): Finds the remainder after division
+- **Power** (`**`): Raises a number to the power of another
+- **Percentage** (`% of`): Calculates percentage of a number
+
+## Usage
+
+```python
+# Example usage
+from calculator import Calculator
+
+calc = Calculator()
+
+# Addition
+print(calc.add(10, 5))  # result: 15
+
+# Substraction
+print(calc.substract(10, 5))   # result: 5
+
+# Multiplication 
+print(calc.Multiply(10.0, 5.0))  # result: 50
+
+# Power
+print(calc.power(2.0, 3.0))  # result: 8
+
+# Modular
+print(calc.Modular(10.0, 3.0)) # result: 1
+
+# Percentage
+print(calc.Percentage(200.0, 10)) # result: 20

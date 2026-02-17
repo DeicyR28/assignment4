@@ -518,14 +518,18 @@ def test_calculation_repr_representation_division():
     ('multiply', 10.0, 5.0, 50.0),
     ('divide', 10.0, 5.0, 2.0),
     ('power', 2.0, 3.0, 8.0 ),
+    ('modular', 10.0, 3.0, 1.0),
+    ('percentage', 200.00, 10, 20),
 ])
 @patch.object(Operation, 'addition')
 @patch.object(Operation, 'subtraction')
 @patch.object(Operation, 'multiplication')
 @patch.object(Operation, 'division')
 @patch.object(Operation, 'power')
+@patch.object(Operation, 'modular')
+@patch.object(Operation, 'percentage')
 def test_calculation_execute_parameterized(
-    mock_power, mock_division, mock_multiplication, mock_subtraction, mock_addition, 
+    mock_percentage, mock_modular, mock_power, mock_division, mock_multiplication, mock_subtraction, mock_addition, 
     calc_type, a, b, expected_result
 ):
     """
@@ -545,6 +549,11 @@ def test_calculation_execute_parameterized(
         mock_division.return_value = expected_result
     elif calc_type == 'power':
         mock_power.return_value = expected_result
+    elif calc_type == 'modular':
+        mock_modular.return_value = expected_result
+    elif calc_type == 'percentage':
+        mock_percentage.return_value = expected_result
+        
 
     # Act: Create calculation instance and execute
     calc = CalculationFactory.create_calculation(calc_type, a, b)
@@ -561,6 +570,10 @@ def test_calculation_execute_parameterized(
         mock_division.assert_called_once_with(a, b)
     elif calc_type == 'power':
         mock_power.assert_called_once_with(a, b)
+    elif calc_type == 'modular':
+        mock_modular.assert_called_once_with(a, b)
+    elif calc_type == 'percentage':
+        mock_percentage.assert_called_once_with(a,b)
 
     assert result == expected_result
 
