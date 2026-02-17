@@ -22,6 +22,7 @@ from app.calculation import (
     MultiplyCalculation,
     DivideCalculation,
     PowerCalculation,
+    ModularCalculation,
     Calculation
 )
 
@@ -249,7 +250,7 @@ def test_power_calculation_execute_positive(mock_power):
     result = power_calc.execute()  # Execute the power calculation
 
     # Assert
-    mock_power.assert_called_once_with(a, b)  # Ensure addition was called with correct operands
+    mock_power.assert_called_once_with(a, b)  # Ensure power was called with correct operands
     assert result == expected_result  # Verify the result matches the expected value
 
 
@@ -273,6 +274,52 @@ def test_power_calculation_execute_negative(mock_power):
 
     # Verify that the exception message is as expected
     assert str(exc_info.value) == "Power error"
+
+@patch.object(Operation, 'modular')
+def test_modular_calculation_execute_positive(mock_modular):
+    """
+    Test the execute method of modularCalculation for a positive scenario.
+
+    This test verifies that the modularCalculation class correctly calls the modular
+    method of the Operation class with the provided operands and returns the expected result.
+    """
+    # Arrange
+    a = 10.0  # First operand
+    b = 3.0   # Second operand
+    expected_result = 1.0  # Expected result of modular
+    mock_modular.return_value = expected_result  # Mock the modular method's return value
+    modular_calc = ModularCalculation(a, b)  # Instantiate modularCalculation with operands
+
+    # Act
+    result = modular_calc.execute()  # Execute the modular calculation
+
+    # Assert
+    mock_modular.assert_called_once_with(a, b)  # Ensure modular was called with correct operands
+    assert result == expected_result  # Verify the result matches the expected value
+
+
+@patch.object(Operation, 'modular')
+def test_modular_calculation_execute_negative(mock_modular):
+    """
+    Test the execute method of modularCalculation for a negative scenario.
+
+    This test ensures that if the Operation.modular method raises an exception,
+    the ModularCalculation.execute method propagates it correctly.
+    """
+    # Arrange
+    a = 10.0
+    b = 3.0
+    mock_modular.side_effect = Exception("Modular error")  # Simulate an exception in modular
+    modular_calc = ModularCalculation(a, b)
+
+    # Act & Assert
+    with pytest.raises(Exception) as exc_info:
+        modular_calc.execute()  # Attempt to execute modular, expecting an exception
+
+    # Verify that the exception message is as expected
+    assert str(exc_info.value) == "Modular error"
+
+
 
 # -----------------------------------------------------------------------------------
 # Test CalculationFactory
