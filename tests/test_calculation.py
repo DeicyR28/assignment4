@@ -21,6 +21,7 @@ from app.calculation import (
     SubtractCalculation,
     MultiplyCalculation,
     DivideCalculation,
+    PowerCalculation,
     Calculation
 )
 
@@ -228,6 +229,50 @@ def test_divide_calculation_execute_division_by_zero():
     # Verify the exception message is as expected
     assert str(exc_info.value) == "Cannot divide by zero."
 
+
+@patch.object(Operation, 'power')
+def test_power_calculation_execute_positive(mock_power):
+    """
+    Test the execute method of powerCalculation for a positive scenario.
+
+    This test verifies that the powerCalculation class correctly calls the power
+    method of the Operation class with the provided operands and returns the expected result.
+    """
+    # Arrange
+    a = 2.0  # First operand
+    b = 3.0   # Second operand
+    expected_result = 8.0  # Expected result of power
+    mock_power.return_value = expected_result  # Mock the power method's return value
+    power_calc = PowerCalculation(a, b)  # Instantiate powerCalculation with operands
+
+    # Act
+    result = power_calc.execute()  # Execute the power calculation
+
+    # Assert
+    mock_power.assert_called_once_with(a, b)  # Ensure addition was called with correct operands
+    assert result == expected_result  # Verify the result matches the expected value
+
+
+@patch.object(Operation, 'power')
+def test_power_calculation_execute_negative(mock_power):
+    """
+    Test the execute method of AddCalculation for a negative scenario.
+
+    This test ensures that if the Operation.addition method raises an exception,
+    the AddCalculation.execute method propagates it correctly.
+    """
+    # Arrange
+    a = 2.0
+    b = 3.0
+    mock_power.side_effect = Exception("Power error")  # Simulate an exception in power
+    power_calc = PowerCalculation(a, b)
+
+    # Act & Assert
+    with pytest.raises(Exception) as exc_info:
+        power_calc.execute()  # Attempt to execute power, expecting an exception
+
+    # Verify that the exception message is as expected
+    assert str(exc_info.value) == "Power error"
 
 # -----------------------------------------------------------------------------------
 # Test CalculationFactory
