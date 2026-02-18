@@ -640,6 +640,69 @@ def test_calculation_str_representation_division(mock_division):
     expected_str = f"{divide_calc.__class__.__name__}: {a} Divide {b} = 2.0"
     assert calc_str == expected_str
 
+@patch.object(Operation, 'power', return_value=8.0)
+def test_calculation_str_representation_addition(mock_addition):
+    """
+    Test the __str__ method of PowerCalculation.
+
+    This test verifies that the string representation of an power Calculation instance
+    is formatted correctly, displaying the class name, operation, operands, and result.
+    """
+    # Arrange
+    a = 2.0
+    b = 3.0
+    power_calc = PowerCalculation(a, b)
+
+    # Act
+    calc_str = str(power_calc)
+
+    # Assert
+    # Expected string should reflect the operation name derived from the class name ('Power')
+    expected_str = f"{power_calc.__class__.__name__}: {a} Power {b} = 8.0"
+    assert calc_str == expected_str
+
+@patch.object(Operation, 'modular', return_value=1.0)
+def test_calculation_str_representation_modular(mock_addition):
+    """
+    Test the __str__ method of ModularCalculation.
+
+    This test verifies that the string representation of an ModularCalculation instance
+    is formatted correctly, displaying the class name, operation, operands, and result.
+    """
+    # Arrange
+    a = 10.0
+    b = 3.0
+    modular_calc = ModularCalculation(a, b)
+
+    # Act
+    calc_str = str(modular_calc)
+
+    # Assert
+    # Expected string should reflect the operation name derived from the class name ('Modular')
+    expected_str = f"{modular_calc.__class__.__name__}: {a} Modular {b} = 1.0"
+    assert calc_str == expected_str
+
+@patch.object(Operation, 'percentage', return_value=20.0)
+def test_calculation_str_representation_modular(mock_percentage):
+    """
+    Test the __str__ method of percentageCalculation.
+
+    This test verifies that the string representation of an Percentage Calculation instance
+    is formatted correctly, displaying the class name, operation, operands, and result.
+    """
+    # Arrange
+    a = 200.0
+    b = 10.0
+    percentage_calc = PercentageCalculation(a, b)
+
+    # Act
+    calc_str = str(percentage_calc)
+
+    # Assert
+    # Expected string should reflect the operation name derived from the class name ('Percentage')
+    expected_str = f"{percentage_calc.__class__.__name__}: {a} Percentage {b} = 20.0"
+    assert calc_str == expected_str
+
 
 def test_calculation_repr_representation_subtraction():
     """
