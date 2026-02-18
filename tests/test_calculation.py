@@ -746,6 +746,68 @@ def test_calculation_repr_representation_division():
     assert calc_repr == expected_repr
 
 
+def test_calculation_repr_representation_Power():
+    """
+    Test the __repr__ method of PowerCalculation.
+
+    This test ensures that the repr representation of a PowerCalculation instance
+    accurately reflects the class name and the operands.
+    """
+    # Arrange
+    a = 2.0
+    b = 3.0
+    power_calc = PowerCalculation(a, b)
+
+    # Act
+    calc_repr = repr(power_calc)
+
+    # Assert
+    # The __repr__ should display the class name and the operands in a clear format
+    expected_repr = f"{PowerCalculation.__name__}(a={a}, b={b})"
+    assert calc_repr == expected_repr
+
+def test_calculation_repr_representation_Modular():
+    """
+    Test the __repr__ method of ModularCalculation.
+
+    This test ensures that the repr representation of a ModularCalculation instance
+    accurately reflects the class name and the operands.
+    """
+    # Arrange
+    a = 10.0
+    b = 3.0
+    modular_calc = ModularCalculation(a, b)
+
+    # Act
+    calc_repr = repr(modular_calc)
+
+    # Assert
+    # The __repr__ should display the class name and the operands in a clear format
+    expected_repr = f"{ModularCalculation.__name__}(a={a}, b={b})"
+    assert calc_repr == expected_repr
+
+def test_calculation_repr_representation_percentage():
+    """
+    Test the __repr__ method of percentage Calculation.
+
+    This test ensures that the repr representation of a PercentageCalculation instance
+    accurately reflects the class name and the operands.
+    """
+    # Arrange
+    a = 200.0
+    b = 10.0
+    percentage_calc = PercentageCalculation(a, b)
+
+    # Act
+    calc_repr = repr(percentage_calc)
+
+    # Assert
+    # The __repr__ should display the class name and the operands in a clear format
+    expected_repr = f"{PercentageCalculation.__name__}(a={a}, b={b})"
+    assert calc_repr == expected_repr
+
+
+    
 # -----------------------------------------------------------------------------------
 # Parameterized Tests for Execute Method
 # -----------------------------------------------------------------------------------
