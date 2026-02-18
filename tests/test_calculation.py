@@ -450,23 +450,62 @@ def test_factory_creates_divide_calculation():
 
 def test_factory_creates_power_calculation():
     """
-    Test that CalculationFactory creates a DivideCalculation instance.
+    Test that CalculationFactory creates an PowerCalculation instance.
 
-    This test verifies that the factory correctly instantiates the DivideCalculation
-    class when the 'divide' calculation type is requested.
+    This test ensures that the factory correctly instantiates the PowerCalculation
+    class when the 'power' calculation type is requested.
     """
     # Arrange
-    a = 10.0
-    b = 5.0
+    a = 2.0
+    b = 3.0
 
     # Act
     calc = CalculationFactory.create_calculation('power', a, b)
 
     # Assert
-    assert isinstance(calc, PowerCalculation)
+    assert isinstance(calc, PowerCalculation)  # Check if the instance is of AddCalculation
+    assert calc.a == a                        # Verify the first operand
+    assert calc.b == b                        # Verify the second operand
+
+
+
+def test_factory_creates_modular_calculation():
+    """
+    Test that CalculationFactory creates a ModularCalculation instance.
+
+    This test verifies that the factory correctly instantiates the DivideCalculation
+    class when the 'modular' calculation type is requested.
+    """
+    # Arrange
+    a = 10.0
+    b = 3.0
+
+    # Act
+    calc = CalculationFactory.create_calculation('modular', a, b)
+
+    # Assert
+    assert isinstance(calc, ModularCalculation)
     assert calc.a == a
     assert calc.b == b
 
+def test_factory_creates_percentage_calculation():
+    """
+    Test that CalculationFactory creates a PercentageCalculation instance.
+
+    This test ensures that the factory correctly instantiates the PercentageCalculation
+    class when the 'percentage' calculation type is requested.
+    """
+    # Arrange
+    a = 200.0
+    b = 10.0
+
+    # Act
+    calc = CalculationFactory.create_calculation('percentage', a, b)
+
+    # Assert
+    assert isinstance(calc, PercentageCalculation)
+    assert calc.a == a
+    assert calc.b == b
 
 
 def test_factory_create_unsupported_calculation():
